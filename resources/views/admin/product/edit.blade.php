@@ -8,23 +8,25 @@
       <div class="col-md-12">
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Quick Example</h3>
+            <h3 class="card-title">Edit Product</h3>
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form role="form" action="{{route('product.store')}}" method="POST">
+          <form role="form" action="{{route('product.update', $product)}}" method="POST">
             @csrf
+            @method('PUT')
+
             <div class="card-body">
               <div class="form-group">
                 <label for="Title">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Enter Title">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="" value="{{$product -> title}}">
                 @error('title')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
               <div class="form-group">
                 <label for="Brand">Brand</label>
-                <input type="text" class="form-control @error('brand') is-invalid @enderror" id="brand" name="brand" placeholder="Enter Brand">
+                <input type="text" class="form-control @error('brand') is-invalid @enderror" id="brand" name="brand" placeholder="" value="{{$product -> brand}}">
                 @error('brand')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -40,25 +42,21 @@
               <!-- /. tools -->
               
               <div class="form-group">
-                <label>--Select Category--</label>
-                <select class="form-control @error('category_id') is-invalid @enderror" name="category_id">
-                  @foreach ($categories as $category)
-                  <option value="{{$category->id}}">{{$category->name}}</option>
-                  @error('category_id')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                  @endforeach
+                <label>--Select SubCategory--</label>
+                <select class="form-control" name="subcategory_id">
+               @foreach($subcategories as $subcategory)
+               	<option value="{{$subcategory->id}}" {{$product->subcategory_id == $subcategory->id ? 'selected' : ""}} >{{$subcategory->parent}}
+               	</option>
+               @endforeach
                 </select>
               </div>
               <div class="form-group">
-                <label>--Select Subcategory--</label>
-                <select class="form-control @error('subcategory_id') is-invalid @enderror" name="subcategory_id">
-                  @foreach ($subcategories as $subcategory)
-                  <option value="{{$subcategory->id}}">{{$subcategory->parent}}</option>
-                  @error('subcategory_id')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                  @endforeach
+                <label>--Select category--</label>
+                <select class="form-control @error('subcategory_id') is-invalid @enderror" name="category_id">
+       		   @foreach($categories as $category)
+               	<option value="{{$category->id}}" {{$product->category_id == $category->id ? 'selected' : ""}} >{{$category->name}}
+               	</option>
+               @endforeachÍ
                 </select>
               </div>
               <!-- /.card-header -->  

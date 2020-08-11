@@ -12,14 +12,14 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form role="form" action="{{route('category.update', $category)}}" method="POST">
+          <form role="form" action="{{route('subcategory.update', $subcategory)}}" method="POST">
 
           	@csrf
             @method('PUT')
             <div class="card-body">
               <div class="form-group">
-                <label for="Name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{$category->name}}">
+                <label for="Parent">Parent</label>
+                <input type="text" class="form-control" id="parent" name="parent" value="{{$subcategory->parent}}">
               </div>
             </div>
             <!-- /.card-body -->

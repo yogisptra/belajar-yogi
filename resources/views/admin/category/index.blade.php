@@ -45,13 +45,13 @@
                       <td class="py-0 align-middle">
                         <div class="btn-group btn-group-sm">
                           <a href="{{route('category.edit', $data->id)}}" class="btn btn-info"><i class="fas fa-pen"></i></a>
-                         <form action="{{ route('category.destroy' , $data->id)}}" method="POST">
+                          <form action="{{ route('category.destroy' , $data->id)}}" method="POST">
                             <input name="_method" type="hidden" value="DELETE">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger"
                             onclick="return confirm('Apakah Anda yakin untuk menghapus!')"><i class="fas fa-trash"></i>
                             </button>
-                        </form>
+                          </form>
                         </div>
                       </td>
                     </tr>

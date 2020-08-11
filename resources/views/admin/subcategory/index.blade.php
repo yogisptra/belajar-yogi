@@ -33,8 +33,8 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name Category</th>
-                  <th>Parent Sub Category</th>
+                  <th>Category Name</th>
+                  <th>Parent</th>
                   <th>Action</th>
                 </tr>
               </thead>

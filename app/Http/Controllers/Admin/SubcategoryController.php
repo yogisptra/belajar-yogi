@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Schema\Builder;
 use App\Subcategory;
 use App\Category;
 
@@ -64,7 +65,8 @@ class SubcategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subcategory = Subcategory::find($id);
+        return view('admin.subcategory.edit', compact('subcategory'));
     }
 
     /**
@@ -76,7 +78,10 @@ class SubcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subcategory = Subcategory::find($id);
+        $subcategory->update($request->all());
+        return redirect()->route('subcategory.index');
+
     }
 
     /**
@@ -85,8 +90,9 @@ class SubcategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subcategory $subcategory)
     {
-        //
+        $subcategory->delete();
+        return redirect()->route('subcategory.index');
     }
 }

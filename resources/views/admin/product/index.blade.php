@@ -33,19 +33,36 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Product</th>
+                    <th>Title</th>
+                    <th>Brand</th>
                     <th>Category</th>
                     <th>Subcategory</th>
+                    <th>Description</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
+                  @foreach ($product as $produk)  
+                    <tr>
+                      <td>{{ $produk -> title }}</td>
+                      <td>{{ $produk -> brand }}</td>
+                      <td>{{ $produk -> category -> name }}</td>
+                      <td>{{ $produk -> subcategory -> parent }}</td>
+                      <td>{{ $produk -> description }}</td>
+                      <td class="py-0 align-middle">
+                        <div class="btn-group btn-group-sm">
+                          <a href="{{route('product.edit', $produk->id)}}" class="btn btn-info"><i class="fas fa-pen"></i></a>
+                          <form action="{{ route('product.destroy' , $produk->id)}}" method="POST">
+                            <input name="_method" type="hidden" value="DELETE">
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Apakah Anda yakin untuk menghapus!')"><i class="fas fa-trash"></i>
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach 
                   </tbody>
                 </table>
               </div>

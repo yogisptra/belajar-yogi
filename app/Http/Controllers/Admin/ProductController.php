@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Schema\Builder;
 use App\Product;
 use App\Category;
 use App\Subcategory;
@@ -41,7 +42,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $request->validate([
+            'title' => 'required',
+            'brand' => 'required',
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'description' => 'required',
+        ]);
+        Product::create($data);
+        return redirect()->route('product.index');
     }
 
     /**
@@ -63,7 +73,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::all(); 
+        $subcategories = Subcategory::all();
+        return view('admin.product.edit', compact('product', 'subcategories','categories'));
     }
 
     /**
@@ -75,7 +88,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::all(); 
+        $subcategories = Subcategory::all();
+        $product->update($request->all());
+         return redirect()->route('product.index');
     }
 
     /**
@@ -84,8 +101,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        
+        $product->delete();
+        return redirect()->route('product.index');
     }
 }

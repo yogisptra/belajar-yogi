@@ -16,7 +16,7 @@
             <li class="nav-item has-treeview">  
             <li class="nav-item has-treeview">  
               <a href="{{route('product.index')}}" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-industry"></i>
                 <p>
                   Product
                 </p>
@@ -24,7 +24,7 @@
             </li>
             <li class="nav-item has-treeview">   
               <a href="{{route('category.index')}}" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-bars"></i>
                 <p>
                   Category
                 </p>
